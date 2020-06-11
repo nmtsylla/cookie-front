@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -24,6 +24,7 @@ import { WebsitesDetailComponent } from './websites-detail/websites-detail.compo
 import { WebsiteAddComponent } from './website-add/website-add.component';
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApiRequestInterceptor } from './interceptors';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiRequestInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

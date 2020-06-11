@@ -10,9 +10,6 @@ import {
 import { catchError, tap, map } from 'rxjs/operators'
 import { Website } from './models/website'
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-}
 const apiUrl = environment.apiUrl + '/websites'
 
 @Injectable({
@@ -45,7 +42,7 @@ export class ApiService {
   }
 
   addWebsite (website: Website): Observable<Website> {
-    return this.http.post<Website>(apiUrl, website, httpOptions).pipe(
+    return this.http.post<Website>(apiUrl, this.fromModelToApi(website)).pipe(
       tap((c: Website) => console.log(`added Website id=${c.id}`)),
       catchError(this.handleError<Website>('addWebsite'))
     )
@@ -53,7 +50,7 @@ export class ApiService {
 
   deleteWebsite (id: number): Observable<Website> {
     const url = `${apiUrl}/${id}`
-    return this.http.delete<Website>(url, httpOptions).pipe(
+    return this.http.delete<Website>(url).pipe(
       tap(_ => console.log(`deleted Website id=${id}`)),
       catchError(this.handleError<Website>('deleteWebsite'))
     )
@@ -85,6 +82,16 @@ export class ApiService {
       seenDate: cookie.seen_data,
       expiry: cookie.expiry,
       description: cookie.description
+    }
+  }
+
+  fromModelToApi (row): any {
+    return {
+      url: row.url,
+      weekly_scan_day: row.weeklyScanDay,
+      scan_schedule: row.scanSchedule,
+      added_date: row.addedDate,
+      customer_id: row.customerId
     }
   }
 
