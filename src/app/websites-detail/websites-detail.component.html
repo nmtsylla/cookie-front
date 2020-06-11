@@ -1,27 +1,59 @@
 <div class="example-container mat-elevation-z8">
   <h2>Website Details</h2>
-  <div class="example-loading-shade"
-       *ngIf="isLoadingResults">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
   <div class="button-row">
-    <a mat-flat-button color="primary" [routerLink]="['/websites']"><mat-icon>list</mat-icon></a>
+    <a mat-flat-button color="primary" [routerLink]="['/websites']"
+      ><mat-icon>list</mat-icon></a
+    >
   </div>
   <mat-card class="example-card">
     <mat-card-header>
       <mat-card-title><h2>{{website.url}}</h2></mat-card-title>
       <mat-card-subtitle>Added since: {{website.addedDate}}</mat-card-subtitle>
       <mat-card-subtitle>Last scan : {{website.lastScanned}}</mat-card-subtitle>
-      <mat-card-subtitle>weeklyScanDay : {{website.weeklyScanDay}}</mat-card-subtitle>
-      <mat-card-subtitle>scanSchedule : {{website.scanSchedule}}</mat-card-subtitle>
+      <mat-card-subtitle
+        >weeklyScanDay : {{website.weeklyScanDay}}</mat-card-subtitle
+      >
+      <mat-card-subtitle
+        >scanSchedule : {{website.scanSchedule}}</mat-card-subtitle
+      >
       <mat-card-subtitle>Customer : {{website.customerId}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-
+      <div>
+        <table class="table">
+          <thead>
+            <th>URL</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Path</th>
+            <th>Secure</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of website.kookies">
+              <td>{{row.url}}</td>
+              <td>{{row.name}}</td>
+              <td>{{row.value}}</td>
+              <td>{{row.path}}</td>
+              <td>{{row.secure}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </mat-card-content>
+
     <mat-card-actions>
-      <a mat-flat-button color="primary" [routerLink]="['/edit-website', website.id]"><mat-icon>edit</mat-icon> website</a>
-      <a mat-flat-button color="warn" (click)="deleteWebsite(website.id)"><mat-icon>delete</mat-icon> website</a>
+      <a
+        mat-flat-button
+        color="primary"
+        [routerLink]="['/edit-website', website.id]"
+        ><mat-icon>edit</mat-icon> website</a
+      >
+      <a mat-flat-button color="warn" (click)="deleteWebsite(website.id)"
+        ><mat-icon>delete</mat-icon> website</a
+      >
     </mat-card-actions>
   </mat-card>
 </div>

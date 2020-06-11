@@ -1,3 +1,5 @@
+import { Kookie } from './kookie';
+
 export class Website {
   id: number;
   url: string;
@@ -7,4 +9,5 @@ export class Website {
   lastScanned: string;
   customerId: number;
   active: boolean;
+  kookies?: Kookie[];
 }

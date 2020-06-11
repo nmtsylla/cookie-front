@@ -68,7 +68,24 @@ export class ApiService {
       addedDate: apiRow.added_date,
       lastScanned: apiRow.last_scanned,
       active: apiRow.active,
-      customerId: apiRow.customer_id
+      customerId: apiRow.customer_id,
+      kookies: apiRow.kookies.map(kookie => this.kookieApiToModel(kookie) )
     }
   }
+
+  kookieApiToModel(cookie){
+    return {
+      id: cookie.id,
+      url: cookie.url,
+      value: cookie.value,
+      domain: cookie.domain,
+      path: cookie.path,
+      secure: cookie.secure,
+      httpOnly: cookie.httponly,
+      seenDate: cookie.seen_data,
+      expiry: cookie.expiry,
+      description: cookie.description
+    }
+  }
+
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
+import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router'
 import { ApiService } from '../api.service'
 import { Website } from '../models/website'
+import { Kookie } from '../models/kookie'
 @Component({
   selector: 'app-websites-detail',
   templateUrl: './websites-detail.component.html',
@@ -16,9 +18,12 @@ export class WebsitesDetailComponent implements OnInit {
     customerId: null,
     lastScanned: null,
     addedDate: null,
-    active: true
+    active: true,
+    kookies: null
   }
+  data: Kookie[] = [];
   isLoadingResults = true;
+  displayedColumns: string[] = ['url', 'name', 'value', 'domain', 'path', 'secure', 'expiry'];
   constructor (
     private route: ActivatedRoute,
     private api: ApiService,
@@ -32,7 +37,7 @@ export class WebsitesDetailComponent implements OnInit {
   getWebsiteDetails (id: number) {
     this.api.getWebsiteById(id).subscribe((data: any) => {
       this.website = data;
-      console.log(this.website);
+      this.data = this.website.kookies;
       this.isLoadingResults = false;
     })
   }
