@@ -3,7 +3,7 @@ import { Kookie } from './kookie';
 export class Website {
   id: number;
   url: string;
-  weeklyScanDay: number;
+  weeklyScanDay: string;
   scanSchedule: number;
   addedDate: string;
   lastScanned: string;

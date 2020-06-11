@@ -20,8 +20,8 @@ export class WebsiteAddComponent implements OnInit {
 
   websiteForm: FormGroup;
   isLoadingResults = false;
-  weeklyScanDayList = [{id: 1, name: 'Weekly'}, {id: 2, name: 'Daily'}];
-  scanScheduleList = [{id: 0, name: 'Monday'}, {id: 1, name: 'Tuesday'}, {id: 2, name: 'Wednesday'}];
+  scanScheduleList = ['weekly', 'daily'];
+  weeklyScanDayList = [{id: 0, name: 'Monday'}, {id: 1, name: 'Tuesday'}, {id: 2, name: 'Wednesday'}];
   matcher = new MyErrorStateMatcher();
   constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
@@ -31,7 +31,7 @@ export class WebsiteAddComponent implements OnInit {
       weeklyScanDay : [null, Validators.required],
       scanSchedule : [null, Validators.required],
       customerId : [null, Validators.required],
-      addedDate : [null]
+      addedDate : [new Date(), ]
     });
   }
 
@@ -41,7 +41,7 @@ export class WebsiteAddComponent implements OnInit {
       .subscribe((res: any) => {
           const id = res.id;
           this.isLoadingResults = false;
-          this.router.navigate(['/websites-details', id]);
+          this.router.navigate(['/website-details', id]);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;

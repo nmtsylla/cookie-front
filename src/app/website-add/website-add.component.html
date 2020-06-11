@@ -20,8 +20,8 @@
       <mat-form-field class="example-full-width">
         <mat-label>Scan Schedule</mat-label>
         <mat-select formControlName="scanSchedule">
-          <mat-option *ngFor="let scan of scanScheduleList" [value]="scan.id">
-            {{scan.name}}
+          <mat-option *ngFor="let scan of scanScheduleList" [value]="scan">
+            {{scan}}
           </mat-option>
         </mat-select>
         <mat-error>
