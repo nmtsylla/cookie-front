@@ -3,8 +3,8 @@ export class Website {
   url: string;
   weeklyScanDay: number;
   scanSchedule: number;
-  addedDate: Date;
-  lastScanned: Date;
+  addedDate: string;
+  lastScanned: string;
   customerId: number;
   active: boolean;
 }

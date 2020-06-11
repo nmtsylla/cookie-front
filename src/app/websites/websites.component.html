@@ -1,1 +1,39 @@
-<p>websites works!</p>
+<div class="example-container mat-elevation-z8">
+  <h2>Websites List</h2>
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/add-website']"><mat-icon>Register</mat-icon> Website</a>
+
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="data" class="example-table"
+           matSort matSortActive="url" matSortDisableClear matSortDirection="asc">
+
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef>Website url</th>
+        <td mat-cell *matCellDef="let row">{{row.url}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="weeklyScanDay">
+        <th mat-header-cell *matHeaderCellDef>weeklyScanDay</th>
+        <td mat-cell *matCellDef="let row">{{row.weeklyScanDay}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="scanSchedule">
+        <th mat-header-cell *matHeaderCellDef>scanSchedule</th>
+        <td mat-cell *matCellDef="let row">{{row.scanSchedule}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="addedDate">
+        <th mat-header-cell *matHeaderCellDef>addedDate</th>
+        <td mat-cell *matCellDef="let row">{{row.addedDate}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/website-details/', row.id]"></tr>
+    </table>
+  </div>
+</div>

@@ -30,7 +30,7 @@ export class ApiService {
 
   getWebsites (): Observable<Website[]> {
     return this.http.get<Website[]>(`${apiUrl}`).pipe(
-      tap(websites => console.log('fetched websites')),
+      map(websites => websites.map(website => this.fromApiToModel(website))),
       catchError(this.handleError('getWebsites', []))
     )
   }
@@ -56,5 +56,18 @@ export class ApiService {
       tap(_ => console.log(`deleted Website id=${id}`)),
       catchError(this.handleError<Website>('deleteWebsite'))
     )
+  }
+
+  fromApiToModel(apiRow): Website {
+    return {
+      id: apiRow.id,
+      url: apiRow.url,
+      weeklyScanDay: apiRow.weekly_scan_day,
+      scanSchedule: apiRow.scan_schedule,
+      addedDate: apiRow.added_date,
+      lastScanned: apiRow.last_scanned,
+      active: apiRow.active,
+      customerId: apiRow.customer_id
+    };
   }
 }

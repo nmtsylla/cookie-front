@@ -9,7 +9,7 @@ import { Website } from '../models/website';
 })
 export class WebsitesComponent implements OnInit {
 
-  displayedColumns: string[] = ['url', 'weeklyScanDay', 'scanSchedule', 'addedDate', 'lastScanned', 'customerId'];
+  displayedColumns: string[] = ['url', 'weeklyScanDay', 'scanSchedule', 'addedDate'];
   data: Website[] = [];
   isLoadingResults = true;
   constructor(private api: ApiService) { }
