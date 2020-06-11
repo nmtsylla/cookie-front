@@ -1,19 +1,19 @@
-import { environment } from '../environments/environment';
-import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { environment } from '../environments/environment'
+import { Injectable } from '@angular/core'
+import { Observable, of, throwError } from 'rxjs'
 
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse
-} from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
-import { Website } from './models/website';
+} from '@angular/common/http'
+import { catchError, tap, map } from 'rxjs/operators'
+import { Website } from './models/website'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
-const apiUrl = environment.apiUrl + '/websites';
+const apiUrl = environment.apiUrl + '/websites'
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,7 @@ export class ApiService {
   getWebsiteById (id: number): Observable<Website> {
     const url = `${apiUrl}/${id}`
     return this.http.get<Website>(url).pipe(
+      map(website => this.fromApiToModel(website)),
       tap(_ => console.log(`fetched Website id=${id}`)),
       catchError(this.handleError<Website>(`getWebsiteById id=${id}`))
     )
@@ -58,7 +59,7 @@ export class ApiService {
     )
   }
 
-  fromApiToModel(apiRow): Website {
+  fromApiToModel (apiRow): Website {
     return {
       id: apiRow.id,
       url: apiRow.url,
@@ -68,6 +69,6 @@ export class ApiService {
       lastScanned: apiRow.last_scanned,
       active: apiRow.active,
       customerId: apiRow.customer_id
-    };
+    }
   }
 }

@@ -29,7 +29,7 @@ export class WebsitesDetailComponent implements OnInit {
     this.getWebsiteDetails(this.route.snapshot.params.id);
   }
 
-  getWebsiteDetails(id: number) {
+  getWebsiteDetails (id: number) {
     this.api.getWebsiteById(id).subscribe((data: any) => {
       this.website = data;
       console.log(this.website);
@@ -37,7 +37,7 @@ export class WebsitesDetailComponent implements OnInit {
     })
   }
 
-  deleteWebsite(id: any) {
+  deleteWebsite (id: any) {
     this.isLoadingResults = true;
     this.api.deleteWebsite(id).subscribe(
       res => {
@@ -45,7 +45,7 @@ export class WebsitesDetailComponent implements OnInit {
         this.router.navigate(['/websites']);
       },
       err => {
-        console.log(err);
+        console.log(err)
         this.isLoadingResults = false;
       }
     )
