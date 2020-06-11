@@ -31,7 +31,7 @@ export class WebsiteAddComponent implements OnInit {
       weeklyScanDay : [null, Validators.required],
       scanSchedule : [null, Validators.required],
       customerId : [null, Validators.required],
-      addedDate : [null, Validators.required]
+      addedDate : [null]
     });
   }
 

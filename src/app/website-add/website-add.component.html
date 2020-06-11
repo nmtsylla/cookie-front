@@ -1,1 +1,55 @@
-<p>website-add works!</p>
+<div class="example-container mat-elevation-z8">
+  <h2>Register a new website</h2>
+  <div class="example-loading-shade"
+        *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/websites']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="websiteForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>URL</mat-label>
+        <input matInput placeholder="URL" formControlName="url"
+                [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!websiteForm.get('url').valid && websiteForm.get('url').touched">Please enter the URL</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Scan Schedule</mat-label>
+        <mat-select formControlName="scanSchedule">
+          <mat-option *ngFor="let scan of scanScheduleList" [value]="scan.id">
+            {{scan.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!websiteForm.get('scanSchedule').valid && websiteForm.get('scanSchedule').touched">Please choose the scan schedule</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Weekly Scan day</mat-label>
+        <mat-select formControlName="weeklyScanDay">
+          <mat-option *ngFor="let scan of weeklyScanDayList" [value]="scan.id">
+            {{scan.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!websiteForm.get('weeklyScanDay').valid && websiteForm.get('weeklyScanDay').touched">Please choose the scan day</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Customer ID</mat-label>
+        <input matInput type="number" placeholder="Customer ID" formControlName="customerId"
+                [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!websiteForm.get('customerId').valid && websiteForm.get('customerId').touched">Please enter customer ID</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!websiteForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>
