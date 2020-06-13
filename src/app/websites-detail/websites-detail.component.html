@@ -8,7 +8,7 @@
       ><mat-icon>list</mat-icon></a
     >
   </div>
-  <mat-card class="example-card">
+  <mat-card class="example-card" *ngIf="!isLoadingResults">
     <mat-card-header>
       <mat-card-title><h2>{{website.url}}</h2></mat-card-title>
       <mat-card-subtitle>Added since: {{website.addedDate}}</mat-card-subtitle>
