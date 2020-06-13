@@ -56,6 +56,14 @@ export class ApiService {
     )
   }
 
+  updateWebsite(id: number, website: Website): Observable<Website> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.patch(url, {website: this.fromModelToApi(website)}).pipe(
+      tap(_ => console.log(`updated website id=${id}`)),
+      catchError(this.handleError<any>('updateWebsite'))
+    );
+  }
+
   fromApiToModel (apiRow): Website {
     return {
       id: apiRow.id,
@@ -90,7 +98,6 @@ export class ApiService {
       url: row.url,
       weekly_scan_day: row.weeklyScanDay,
       scan_schedule: row.scanSchedule,
-      added_date: row.addedDate,
       customer_id: row.customerId
     }
   }
