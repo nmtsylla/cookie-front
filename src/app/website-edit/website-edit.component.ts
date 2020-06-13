@@ -49,4 +49,18 @@ export class WebsiteEditComponent implements OnInit {
     });
   }
 
+  onFormSubmit() {
+    this.isLoadingResults = true;
+    this.api.updateWebsite(this.websiteId, this.websiteForm.value)
+      .subscribe((res: any) => {
+          const id = res.id;
+          this.isLoadingResults = false;
+          this.router.navigate(['/website-details', id]);
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+  }
+
 }
