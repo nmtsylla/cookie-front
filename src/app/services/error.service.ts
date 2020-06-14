@@ -6,15 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ErrorService {
 
-    getClientMessage(error: Error): string {
-        if (!navigator.onLine) {
-            return 'Please check your network';
-        }
-        return error.message ? error.message : error.toString();
-    }
-
-    getServerMessage(error: HttpErrorResponse): string {
-        return error.message;
-    }
+  getServerErrorMessage(error: HttpErrorResponse): string {
+    return navigator.onLine ? error.message : 'check your network';
+  }
 
 }
