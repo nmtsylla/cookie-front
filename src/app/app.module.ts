@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -25,6 +25,7 @@ import { WebsiteAddComponent } from './website-add/website-add.component';
 import { WebsiteEditComponent } from './website-edit/website-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiRequestInterceptor } from './interceptors';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ApiRequestInterceptor } from './interceptors';
     MatButtonToggleModule,
     MatSelectModule,
     AppRoutingModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [
