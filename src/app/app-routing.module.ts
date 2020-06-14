@@ -1,40 +1,19 @@
-import { WebsitesComponent } from './websites/websites.component';
-import { WebsitesDetailComponent } from './websites-detail/websites-detail.component';
-import { WebsiteEditComponent } from './website-edit/website-edit.component';
-import { WebsiteAddComponent } from './website-add/website-add.component';
-
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'websites' },
   {
     path: 'websites',
-    component: WebsitesComponent,
-    data: { title: 'List of websites' }
-  },
-  {
-    path: 'website-details/:id',
-    component: WebsitesDetailComponent,
-    data: { title: 'Website Details' }
-  },
-  {
-    path: 'add-website',
-    component: WebsiteAddComponent,
-    data: { title: 'Add Website' }
-  },
-  {
-    path: 'edit-website/:id',
-    component: WebsiteEditComponent,
-    data: { title: 'Edit website' }
-  },
-  { path: '',
-    redirectTo: '/websites',
-    pathMatch: 'full'
+    loadChildren: () =>
+      import('./website-features/website-features.module').then(
+        mod => mod.WebsiteFeaturesModule
+      )
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

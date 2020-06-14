@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import {MatTableDataSource} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router'
-import { ApiService } from '../services/api.service'
-import { Website } from '../models/website'
-import { Kookie } from '../models/kookie'
+import { Website } from 'src/app/models/website';
+import { Kookie } from 'src/app/models/kookie';
+import { ApiService } from 'src/app/services/api.service';
+
 @Component({
   selector: 'app-websites-detail',
   templateUrl: './websites-detail.component.html',
